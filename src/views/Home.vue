@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <label for="channel">Channel name</label>
+    <input type="channel" name="channel" v-model="channel">
+    <button @click="handleClick">Go</button>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
+  data: () => ({ channel: '' }),
+  methods: {
+    handleClick() {
+      if (this.channel) this.$router.push({ name: 'dashboard', params: { channel: this.channel } });
+    },
   },
 });
 </script>
+
+<style scoped lang="scss">
+div {
+  text-align: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+</style>
